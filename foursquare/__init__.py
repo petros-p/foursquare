@@ -287,7 +287,7 @@ class Foursquare(object):
             result = _get(url, headers=headers, params=params, timeout=self.get_timeout)
             self.rate_limit = result["headers"]["X-RateLimit-Limit"]
             self.rate_remaining = result["headers"]["X-RateLimit-Remaining"]
-            self.rate_reset = result["headers"]["X-RateLimit-Reset"]
+            self.rate_reset = result["headers"].get("X-RateLimit-Reset")
             return result["data"]["response"]
 
         def add_multi_request(self, path, params={}):
@@ -314,7 +314,7 @@ class Foursquare(object):
             )
             self.rate_limit = result["headers"]["X-RateLimit-Limit"]
             self.rate_remaining = result["headers"]["X-RateLimit-Remaining"]
-            self.rate_reset = result["headers"]["X-RateLimit-Reset"]
+            self.rate_reset = result["headers"].get("X-RateLimit-Reset")
             return result["data"]["response"]
 
         def _enrich_params(self, params):
